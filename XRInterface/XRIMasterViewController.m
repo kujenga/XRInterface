@@ -10,10 +10,13 @@
 
 #import "XRIDetailViewController.h"
 
+#import "XRINewConnectionViewController.h"
+
 @interface XRIMasterViewController () {
     NSMutableArray *_objects;
 }
 @end
+
 
 @implementation XRIMasterViewController
 
@@ -32,9 +35,8 @@
 	// Do any additional setup after loading the view, typically from a nib.
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
-    self.navigationItem.rightBarButtonItem = addButton;
-    self.detailViewController = (XRIDetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -53,6 +55,27 @@
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
+- (void)insertNewObject:(id)sender withString:(NSString *)str
+{
+    if (!_objects) {
+        _objects = [[NSMutableArray alloc] init];
+    }
+    [_objects insertObject:str atIndex:0];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"showDetail"]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        NSDate *object = _objects[indexPath.row];
+        [[segue destinationViewController] setDetailItem:object];
+    } else if ([[segue identifier] isEqualToString:@"showCreator"]) {
+        [[segue destinationViewController] connectMaster:self];
+    }
+
+}
 #pragma mark - Table View
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -111,15 +134,6 @@
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         NSDate *object = _objects[indexPath.row];
         self.detailViewController.detailItem = object;
-    }
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([[segue identifier] isEqualToString:@"showDetail"]) {
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSDate *object = _objects[indexPath.row];
-        [[segue destinationViewController] setDetailItem:object];
     }
 }
 

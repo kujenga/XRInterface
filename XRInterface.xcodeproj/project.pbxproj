@@ -23,6 +23,7 @@
 		863164BE18C92627006CC9C3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8631649A18C92626006CC9C3 /* UIKit.framework */; };
 		863164C618C92627006CC9C3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 863164C418C92627006CC9C3 /* InfoPlist.strings */; };
 		863164C818C92627006CC9C3 /* XRInterfaceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 863164C718C92627006CC9C3 /* XRInterfaceTests.m */; };
+		86CBBF4D18C927DB00F6BAFF /* XRINewConnectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86CBBF4C18C927DB00F6BAFF /* XRINewConnectionViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,8 @@
 		863164C318C92627006CC9C3 /* XRInterfaceTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "XRInterfaceTests-Info.plist"; sourceTree = "<group>"; };
 		863164C518C92627006CC9C3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		863164C718C92627006CC9C3 /* XRInterfaceTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XRInterfaceTests.m; sourceTree = "<group>"; };
+		86CBBF4B18C927DB00F6BAFF /* XRINewConnectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRINewConnectionViewController.h; sourceTree = "<group>"; };
+		86CBBF4C18C927DB00F6BAFF /* XRINewConnectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XRINewConnectionViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +128,8 @@
 				863164AF18C92627006CC9C3 /* XRIMasterViewController.m */,
 				863164B118C92627006CC9C3 /* XRIDetailViewController.h */,
 				863164B218C92627006CC9C3 /* XRIDetailViewController.m */,
+				86CBBF4B18C927DB00F6BAFF /* XRINewConnectionViewController.h */,
+				86CBBF4C18C927DB00F6BAFF /* XRINewConnectionViewController.m */,
 				863164B418C92627006CC9C3 /* Images.xcassets */,
 				8631649D18C92626006CC9C3 /* Supporting Files */,
 			);
@@ -260,6 +265,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				863164B018C92627006CC9C3 /* XRIMasterViewController.m in Sources */,
+				86CBBF4D18C927DB00F6BAFF /* XRINewConnectionViewController.m in Sources */,
 				863164B318C92627006CC9C3 /* XRIDetailViewController.m in Sources */,
 				863164A718C92627006CC9C3 /* XRIAppDelegate.m in Sources */,
 				863164A318C92626006CC9C3 /* main.m in Sources */,
@@ -481,6 +487,7 @@
 				863164CD18C92627006CC9C3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		863164CE18C92627006CC9C3 /* Build configuration list for PBXNativeTarget "XRInterfaceTests" */ = {
 			isa = XCConfigurationList;
@@ -489,6 +496,7 @@
 				863164D018C92627006CC9C3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
