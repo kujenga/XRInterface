@@ -13,7 +13,7 @@
 
 @interface XRIMasterViewController : UITableViewController
 
-- (void)insertNewObject:(id)sender withString:(NSString*) str;
+- (void)insertNewObject:(id)sender withConnectionAttributes:(NSDictionary*) connectionAttributes;
 
 @property (strong, nonatomic) XRIDetailViewController *detailViewController;
 @property (strong,nonatomic) XRINewConnectionViewController *connectionViewController;

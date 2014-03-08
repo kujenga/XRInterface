@@ -7,13 +7,14 @@
 //
 
 #import "XRIMasterViewController.h"
-
 #import "XRIDetailViewController.h"
-
 #import "XRINewConnectionViewController.h"
+
+#define DEFAULT_PORT 8123
 
 @interface XRIMasterViewController () {
     NSMutableArray *_objects;
+    NSMutableArray *_connections;
 }
 @end
 
@@ -35,8 +36,18 @@
 	// Do any additional setup after loading the view, typically from a nib.
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
-    
-    
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    NSMutableDictionary * defaultConnection = [[NSMutableDictionary alloc] initWithCapacity:10];
+    [defaultConnection setObject:@"Default Connection" forKey:@"Name"];
+    [defaultConnection setObject:[NSURL URLWithString:@"http://rath.cs.williams.edu"] forKey:@"URL"];
+    [defaultConnection setObject:[NSNumber numberWithInt:DEFAULT_PORT] forKey:@"Port"];
+    [_connections addObject:defaultConnection];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:_connections.count-1 inSection:0];
+    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -55,27 +66,32 @@
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
-- (void)insertNewObject:(id)sender withString:(NSString *)str
+-(void)insertNewObject:(id)sender withConnectionAttributes:(NSDictionary *)connectionAttributes
 {
-    if (!_objects) {
-        _objects = [[NSMutableArray alloc] init];
+    if (!_connections) {
+        _connections = [[NSMutableArray alloc] init];
     }
-    [_objects insertObject:str atIndex:0];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    [_connections addObject:connectionAttributes];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:_connections.count-1 inSection:0];
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
+        
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSDate *object = _objects[indexPath.row];
-        [[segue destinationViewController] setDetailItem:object];
+        //NSDate *object = _objects[indexPath.row];
+        NSDictionary *chosenAttributes = _connections[indexPath.row];
+        [[segue destinationViewController] setDetailItem:chosenAttributes];
+        
     } else if ([[segue identifier] isEqualToString:@"showCreator"]) {
+        
         [[segue destinationViewController] connectMaster:self];
     }
 
 }
+
 #pragma mark - Table View
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -85,15 +101,14 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _objects.count;
+    return _connections.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
 
-    NSDate *object = _objects[indexPath.row];
-    cell.textLabel.text = [object description];
+    cell.textLabel.text = [_connections[indexPath.row] objectForKey:@"Name"];
     return cell;
 }
 

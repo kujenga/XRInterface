@@ -23,6 +23,15 @@
 		863164BE18C92627006CC9C3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8631649A18C92626006CC9C3 /* UIKit.framework */; };
 		863164C618C92627006CC9C3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 863164C418C92627006CC9C3 /* InfoPlist.strings */; };
 		863164C818C92627006CC9C3 /* XRInterfaceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 863164C718C92627006CC9C3 /* XRInterfaceTests.m */; };
+		863BED7818CA8BC000664312 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 863BED6518CA8BC000664312 /* NSData+Base64.m */; };
+		863BED7918CA8BC000664312 /* NSStringAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 863BED6718CA8BC000664312 /* NSStringAdditions.m */; };
+		863BED7A18CA8BC000664312 /* XMLRPCConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 863BED6918CA8BC000664312 /* XMLRPCConnection.m */; };
+		863BED7B18CA8BC000664312 /* XMLRPCConnectionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 863BED6C18CA8BC000664312 /* XMLRPCConnectionManager.m */; };
+		863BED7C18CA8BC000664312 /* XMLRPCDefaultEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 863BED6E18CA8BC000664312 /* XMLRPCDefaultEncoder.m */; };
+		863BED7D18CA8BC000664312 /* XMLRPCEventBasedParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 863BED7118CA8BC000664312 /* XMLRPCEventBasedParser.m */; };
+		863BED7E18CA8BC000664312 /* XMLRPCEventBasedParserDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 863BED7318CA8BC000664312 /* XMLRPCEventBasedParserDelegate.m */; };
+		863BED7F18CA8BC000664312 /* XMLRPCRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 863BED7518CA8BC000664312 /* XMLRPCRequest.m */; };
+		863BED8018CA8BC000664312 /* XMLRPCResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 863BED7718CA8BC000664312 /* XMLRPCResponse.m */; };
 		86CBBF4D18C927DB00F6BAFF /* XRINewConnectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86CBBF4C18C927DB00F6BAFF /* XRINewConnectionViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +68,26 @@
 		863164C318C92627006CC9C3 /* XRInterfaceTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "XRInterfaceTests-Info.plist"; sourceTree = "<group>"; };
 		863164C518C92627006CC9C3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		863164C718C92627006CC9C3 /* XRInterfaceTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XRInterfaceTests.m; sourceTree = "<group>"; };
+		863BED6418CA8BC000664312 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
+		863BED6518CA8BC000664312 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
+		863BED6618CA8BC000664312 /* NSStringAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSStringAdditions.h; sourceTree = "<group>"; };
+		863BED6718CA8BC000664312 /* NSStringAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSStringAdditions.m; sourceTree = "<group>"; };
+		863BED6818CA8BC000664312 /* XMLRPCConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLRPCConnection.h; sourceTree = "<group>"; };
+		863BED6918CA8BC000664312 /* XMLRPCConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLRPCConnection.m; sourceTree = "<group>"; };
+		863BED6A18CA8BC000664312 /* XMLRPCConnectionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLRPCConnectionDelegate.h; sourceTree = "<group>"; };
+		863BED6B18CA8BC000664312 /* XMLRPCConnectionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLRPCConnectionManager.h; sourceTree = "<group>"; };
+		863BED6C18CA8BC000664312 /* XMLRPCConnectionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLRPCConnectionManager.m; sourceTree = "<group>"; };
+		863BED6D18CA8BC000664312 /* XMLRPCDefaultEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLRPCDefaultEncoder.h; sourceTree = "<group>"; };
+		863BED6E18CA8BC000664312 /* XMLRPCDefaultEncoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLRPCDefaultEncoder.m; sourceTree = "<group>"; };
+		863BED6F18CA8BC000664312 /* XMLRPCEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLRPCEncoder.h; sourceTree = "<group>"; };
+		863BED7018CA8BC000664312 /* XMLRPCEventBasedParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLRPCEventBasedParser.h; sourceTree = "<group>"; };
+		863BED7118CA8BC000664312 /* XMLRPCEventBasedParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLRPCEventBasedParser.m; sourceTree = "<group>"; };
+		863BED7218CA8BC000664312 /* XMLRPCEventBasedParserDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLRPCEventBasedParserDelegate.h; sourceTree = "<group>"; };
+		863BED7318CA8BC000664312 /* XMLRPCEventBasedParserDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLRPCEventBasedParserDelegate.m; sourceTree = "<group>"; };
+		863BED7418CA8BC000664312 /* XMLRPCRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLRPCRequest.h; sourceTree = "<group>"; };
+		863BED7518CA8BC000664312 /* XMLRPCRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLRPCRequest.m; sourceTree = "<group>"; };
+		863BED7618CA8BC000664312 /* XMLRPCResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLRPCResponse.h; sourceTree = "<group>"; };
+		863BED7718CA8BC000664312 /* XMLRPCResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLRPCResponse.m; sourceTree = "<group>"; };
 		86CBBF4B18C927DB00F6BAFF /* XRINewConnectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRINewConnectionViewController.h; sourceTree = "<group>"; };
 		86CBBF4C18C927DB00F6BAFF /* XRINewConnectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XRINewConnectionViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -130,6 +159,7 @@
 				863164B218C92627006CC9C3 /* XRIDetailViewController.m */,
 				86CBBF4B18C927DB00F6BAFF /* XRINewConnectionViewController.h */,
 				86CBBF4C18C927DB00F6BAFF /* XRINewConnectionViewController.m */,
+				863BED5818CA8B1800664312 /* XML-RPC handling */,
 				863164B418C92627006CC9C3 /* Images.xcassets */,
 				8631649D18C92626006CC9C3 /* Supporting Files */,
 			);
@@ -163,6 +193,33 @@
 				863164C418C92627006CC9C3 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		863BED5818CA8B1800664312 /* XML-RPC handling */ = {
+			isa = PBXGroup;
+			children = (
+				863BED6418CA8BC000664312 /* NSData+Base64.h */,
+				863BED6518CA8BC000664312 /* NSData+Base64.m */,
+				863BED6618CA8BC000664312 /* NSStringAdditions.h */,
+				863BED6718CA8BC000664312 /* NSStringAdditions.m */,
+				863BED6818CA8BC000664312 /* XMLRPCConnection.h */,
+				863BED6918CA8BC000664312 /* XMLRPCConnection.m */,
+				863BED6A18CA8BC000664312 /* XMLRPCConnectionDelegate.h */,
+				863BED6B18CA8BC000664312 /* XMLRPCConnectionManager.h */,
+				863BED6C18CA8BC000664312 /* XMLRPCConnectionManager.m */,
+				863BED6D18CA8BC000664312 /* XMLRPCDefaultEncoder.h */,
+				863BED6E18CA8BC000664312 /* XMLRPCDefaultEncoder.m */,
+				863BED6F18CA8BC000664312 /* XMLRPCEncoder.h */,
+				863BED7018CA8BC000664312 /* XMLRPCEventBasedParser.h */,
+				863BED7118CA8BC000664312 /* XMLRPCEventBasedParser.m */,
+				863BED7218CA8BC000664312 /* XMLRPCEventBasedParserDelegate.h */,
+				863BED7318CA8BC000664312 /* XMLRPCEventBasedParserDelegate.m */,
+				863BED7418CA8BC000664312 /* XMLRPCRequest.h */,
+				863BED7518CA8BC000664312 /* XMLRPCRequest.m */,
+				863BED7618CA8BC000664312 /* XMLRPCResponse.h */,
+				863BED7718CA8BC000664312 /* XMLRPCResponse.m */,
+			);
+			name = "XML-RPC handling";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -225,6 +282,7 @@
 			knownRegions = (
 				en,
 				Base,
+				English,
 			);
 			mainGroup = 8631648A18C92626006CC9C3;
 			productRefGroup = 8631649418C92626006CC9C3 /* Products */;
@@ -264,11 +322,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				863BED7C18CA8BC000664312 /* XMLRPCDefaultEncoder.m in Sources */,
 				863164B018C92627006CC9C3 /* XRIMasterViewController.m in Sources */,
 				86CBBF4D18C927DB00F6BAFF /* XRINewConnectionViewController.m in Sources */,
+				863BED7F18CA8BC000664312 /* XMLRPCRequest.m in Sources */,
 				863164B318C92627006CC9C3 /* XRIDetailViewController.m in Sources */,
+				863BED7E18CA8BC000664312 /* XMLRPCEventBasedParserDelegate.m in Sources */,
+				863BED8018CA8BC000664312 /* XMLRPCResponse.m in Sources */,
+				863BED7B18CA8BC000664312 /* XMLRPCConnectionManager.m in Sources */,
+				863BED7A18CA8BC000664312 /* XMLRPCConnection.m in Sources */,
 				863164A718C92627006CC9C3 /* XRIAppDelegate.m in Sources */,
+				863BED7D18CA8BC000664312 /* XMLRPCEventBasedParser.m in Sources */,
 				863164A318C92626006CC9C3 /* main.m in Sources */,
+				863BED7918CA8BC000664312 /* NSStringAdditions.m in Sources */,
+				863BED7818CA8BC000664312 /* NSData+Base64.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

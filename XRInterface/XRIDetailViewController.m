@@ -8,6 +8,10 @@
 
 #import "XRIDetailViewController.h"
 
+#import "XMLRPCRequest.h"
+#import "XMLRPCResponse.h"
+#import "XMLRPCConnectionManager.h"
+
 @interface XRIDetailViewController ()
 @property (strong, nonatomic) UIPopoverController *masterPopoverController;
 - (void)configureView;
@@ -28,7 +32,7 @@
 
     if (self.masterPopoverController != nil) {
         [self.masterPopoverController dismissPopoverAnimated:YES];
-    }        
+    }
 }
 
 - (void)configureView
@@ -45,12 +49,57 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     [self configureView];
+    
+    NSURL *URL = [NSURL URLWithString: @"http://127.0.0.1:8080/"];
+    XMLRPCRequest *request = [[XMLRPCRequest alloc] initWithURL: URL];
+    XMLRPCConnectionManager *manager = [XMLRPCConnectionManager sharedManager];
+    
+    [request setMethod: @"Echo.echo" withParameter: @"Hello World!"];
+    
+    NSLog(@"Request body: %@", [request body]);
+    
+    [manager spawnConnectionWithXMLRPCRequest: request delegate: self];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - XMLRPCConnectionDelegate methods
+
+- (void)request: (XMLRPCRequest *)request didReceiveResponse: (XMLRPCResponse *)response {
+    if ([response isFault]) {
+        NSLog(@"Fault code: %@", [response faultCode]);
+        
+        NSLog(@"Fault string: %@", [response faultString]);
+    } else {
+        NSLog(@"Parsed response: %@", [response object]);
+    }
+    
+    NSLog(@"Response body: %@", [response body]);
+}
+
+- (void)request: (XMLRPCRequest *)request didFailWithError: (NSError *)error
+{
+    NSLog(@"XMLRPC requestfailed with error: %@",error);
+}
+
+
+- (BOOL)request: (XMLRPCRequest *)request canAuthenticateAgainstProtectionSpace: (NSURLProtectionSpace *)protectionSpace
+{
+    return NO;
+}
+
+- (void)request: (XMLRPCRequest *)request didReceiveAuthenticationChallenge: (NSURLAuthenticationChallenge *)challenge
+{
+    
+}
+
+- (void)request: (XMLRPCRequest *)request didCancelAuthenticationChallenge: (NSURLAuthenticationChallenge *)challenge
+{
+    
 }
 
 #pragma mark - Split view

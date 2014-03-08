@@ -10,14 +10,15 @@
 
 @class XRIMasterViewController;
 
-@interface XRINewConnectionViewController : UIViewController <UITextFieldDelegate>
+@interface XRINewConnectionViewController : UIViewController <UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 
 -(void) connectMaster:(id) sender;
 
 -(IBAction) cancelCreation:(id)sender;
 -(IBAction) finishCreation:(id) sender;
 
-@property IBOutlet UITextField *textInput;
+
+@property (weak, nonatomic) IBOutlet UITableView *inputTable;
 
 @property (weak,nonatomic) XRIMasterViewController *masterController;
 
