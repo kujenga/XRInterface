@@ -115,63 +115,65 @@
                                        reuseIdentifier:CellIdentifier];
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
-    UITextField *playerTextField ;
+    UITextField *inputField ;
     if ([indexPath section] == 0) {
-        playerTextField = [[UITextField alloc] initWithFrame:CGRectMake(73, 10, 222, 30)];
-        playerTextField.adjustsFontSizeToFitWidth = YES;
-        playerTextField.textColor = [UIColor blackColor];
+        inputField = [[UITextField alloc] initWithFrame:CGRectMake(73, 10, 222, 30)];
+        inputField.adjustsFontSizeToFitWidth = YES;
+        inputField.textColor = [UIColor blackColor];
         if ([indexPath row] == 0) { // Name for the Connection
             //Label
             cell.textLabel.text = @"Name";
             //Text Field
-            playerTextField.tag = 0;
-            playerTextField.placeholder = @"Example Name";
-            playerTextField.keyboardType = UIKeyboardTypeAlphabet;
-            playerTextField.returnKeyType = UIReturnKeyNext;
+            inputField.tag = 0;
+            inputField.placeholder = @"Example Name";
+            inputField.keyboardType = UIKeyboardTypeAlphabet;
+            inputField.returnKeyType = UIReturnKeyNext;
         }
     } else if ([indexPath section] == 1) {
-        playerTextField = [[UITextField alloc] initWithFrame:CGRectMake(60, 10, 235, 30)];
-        playerTextField.adjustsFontSizeToFitWidth = YES;
-        playerTextField.textColor = [UIColor blackColor];
+        inputField = [[UITextField alloc] initWithFrame:CGRectMake(60, 10, 235, 30)];
+        inputField.adjustsFontSizeToFitWidth = YES;
+        inputField.textColor = [UIColor blackColor];
         if ([indexPath row] == 0) { // URL for the Connection
             //Label
             cell.textLabel.text = @"URL";
             //Text Field
-            playerTextField.tag = 1;
-            playerTextField.placeholder = @"http://www.example.com";
-            playerTextField.keyboardType = UIKeyboardTypeURL;
-            playerTextField.returnKeyType = UIReturnKeyNext;
+            inputField.tag = 1;
+            inputField.placeholder = @"http://www.example.com";
+            inputField.keyboardType = UIKeyboardTypeURL;
+            inputField.returnKeyType = UIReturnKeyNext;
         } else { // Port for the Connection
             //Label
             cell.textLabel.text = @"Port";
             //Text Field
-            playerTextField.tag = 2;
-            playerTextField.placeholder = @"8888";
-            playerTextField.keyboardType = UIKeyboardTypeNumberPad;
-            playerTextField.returnKeyType = UIReturnKeyDone;
+            inputField.tag = 2;
+            inputField.placeholder = @"8888";
+            inputField.keyboardType = UIKeyboardTypeNumberPad;
+            inputField.returnKeyType = UIReturnKeyDone;
         }
+    } else if (indexPath.section == 2) {
+        
     } else { // default Cells
         //Label
         cell.textLabel.text = @"Other";
         //Text Field
-        playerTextField = [[UITextField alloc] initWithFrame:CGRectMake(70, 10, 225, 30)];
-        playerTextField.adjustsFontSizeToFitWidth = YES;
-        playerTextField.textColor = [UIColor blackColor];
-        playerTextField.tag = 3;
-        playerTextField.placeholder = @"Other Info";
-        playerTextField.keyboardType = UIKeyboardTypeAlphabet;
-        playerTextField.returnKeyType = UIReturnKeyDone;
+        inputField = [[UITextField alloc] initWithFrame:CGRectMake(70, 10, 225, 30)];
+        inputField.adjustsFontSizeToFitWidth = YES;
+        inputField.textColor = [UIColor blackColor];
+        inputField.tag = 3;
+        inputField.placeholder = @"Other Info";
+        inputField.keyboardType = UIKeyboardTypeAlphabet;
+        inputField.returnKeyType = UIReturnKeyDone;
     }
-    playerTextField.backgroundColor = [UIColor whiteColor];
-    playerTextField.autocorrectionType = UITextAutocorrectionTypeNo; // no auto correction support
-    playerTextField.autocapitalizationType = UITextAutocapitalizationTypeNone; // no auto capitalization support
-    //playerTextField.textAlignment = UITextAlignmentLeft;
-    playerTextField.delegate = self;
+    inputField.backgroundColor = [UIColor whiteColor];
+    inputField.autocorrectionType = UITextAutocorrectionTypeNo; // no auto correction support
+    inputField.autocapitalizationType = UITextAutocapitalizationTypeNone; // no auto capitalization support
+    //inputField.textAlignment = UITextAlignmentLeft;
+    inputField.delegate = self;
     
-    playerTextField.clearButtonMode = UITextFieldViewModeNever; // no clear 'x' button to the right
-    [playerTextField setEnabled: YES];
+    inputField.clearButtonMode = UITextFieldViewModeNever; // no clear 'x' button to the right
+    [inputField setEnabled: YES];
         
-    [cell.contentView addSubview:playerTextField];
+    [cell.contentView addSubview:inputField];
 
     return cell;
 }

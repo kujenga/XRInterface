@@ -50,11 +50,16 @@
 	// Do any additional setup after loading the view, typically from a nib.
     [self configureView];
     
-    NSURL *URL = [NSURL URLWithString: @"http://127.0.0.1:8080/"];
+    NSDictionary *attributes = (NSDictionary*)self.detailItem;
+    NSString *URLString = [NSString stringWithFormat:@"%@:%@",[attributes objectForKey:@"URL"],[attributes objectForKey:@"Port"]];
+    NSLog(@"URLString: %@",URLString);
+    NSURL *URL = [NSURL URLWithString: URLString];
     XMLRPCRequest *request = [[XMLRPCRequest alloc] initWithURL: URL];
     XMLRPCConnectionManager *manager = [XMLRPCConnectionManager sharedManager];
     
-    [request setMethod: @"Echo.echo" withParameter: @"Hello World!"];
+    NSArray *params = @[@53477]; // Achieving Less Bugs with More Hugs in CSCI 339 (item: 53477)
+    
+    [request setMethod: @"mainServer.lookUp" withParameters:params];
     
     NSLog(@"Request body: %@", [request body]);
     
