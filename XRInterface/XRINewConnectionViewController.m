@@ -9,7 +9,9 @@
 #import "XRINewConnectionViewController.h"
 #import "XRIMasterViewController.h"
 
-@interface XRINewConnectionViewController ()
+@interface XRINewConnectionViewController () {
+    NSInteger paramNum;
+}
 
 @property (strong,atomic) NSMutableDictionary * attributesDict;
 
@@ -38,8 +40,11 @@
     
     self.inputTable.delegate = self;
     self.inputTable.dataSource = self;
+    
+    paramNum = 1;
 
     self.attributesDict = [[NSMutableDictionary alloc] initWithCapacity:10];
+    [self.attributesDict setObject:[[NSMutableArray alloc] init] forKey:@"Parameters"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -86,8 +91,12 @@
     switch (section) {
         case 0:
             return 1;
-        default:
+        case 1:
             return 2;
+        case 2:
+            return 1 + paramNum;
+        default:
+            return 1;
     }
 }
 
@@ -105,6 +114,8 @@
     }
 }
 
+// Creates and returns custom cells for each type of input
+// probably would make sense to create a custom subclass of UITableViewCell and move this code there
 -(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"EntryCell";
@@ -117,7 +128,7 @@
     }
     UITextField *inputField ;
     if ([indexPath section] == 0) {
-        inputField = [[UITextField alloc] initWithFrame:CGRectMake(73, 10, 222, 30)];
+        inputField = [[UITextField alloc] initWithFrame:CGRectMake(70, 10, 225, 30)];
         inputField.adjustsFontSizeToFitWidth = YES;
         inputField.textColor = [UIColor blackColor];
         if ([indexPath row] == 0) { // Name for the Connection
@@ -130,7 +141,7 @@
             inputField.returnKeyType = UIReturnKeyNext;
         }
     } else if ([indexPath section] == 1) {
-        inputField = [[UITextField alloc] initWithFrame:CGRectMake(60, 10, 235, 30)];
+        inputField = [[UITextField alloc] initWithFrame:CGRectMake(57, 10, 238, 30)];
         inputField.adjustsFontSizeToFitWidth = YES;
         inputField.textColor = [UIColor blackColor];
         if ([indexPath row] == 0) { // URL for the Connection
@@ -151,7 +162,29 @@
             inputField.returnKeyType = UIReturnKeyDone;
         }
     } else if (indexPath.section == 2) {
-        
+        if ([indexPath row] == 0) { // Method Call for the connection
+            //Label
+            cell.textLabel.text = @"Method";
+            //Text Field
+            inputField = [[UITextField alloc] initWithFrame:CGRectMake(83, 10, 212, 30)];
+            inputField.adjustsFontSizeToFitWidth = YES;
+            inputField.textColor = [UIColor blackColor];
+            inputField.tag = 3;
+            inputField.placeholder = @"mainServer.foo";
+            inputField.keyboardType = UIKeyboardTypeURL;
+            inputField.returnKeyType = UIReturnKeyNext;
+        } else { // Default Parameter for the Connection
+            //Label
+            cell.textLabel.text = @"";
+            //Text Field
+            inputField = [[UITextField alloc] initWithFrame:CGRectMake(18, 10, 277, 30)];
+            inputField.adjustsFontSizeToFitWidth = YES;
+            inputField.textColor = [UIColor blackColor];
+            inputField.tag = 4;
+            inputField.placeholder = @"Default Input Parameter";
+            inputField.keyboardType = UIKeyboardTypeAlphabet;
+            inputField.returnKeyType = UIReturnKeyDone;
+        }
     } else { // default Cells
         //Label
         cell.textLabel.text = @"Other";
@@ -192,6 +225,31 @@
     
 }
 
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
+    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+        paramNum++;
+        NSIndexPath * newPath = [NSIndexPath indexPathForRow:paramNum inSection:2];
+        [self.inputTable insertRowsAtIndexPaths:@[newPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+}
+
+-(BOOL) tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ((indexPath.section == 2) && (indexPath.row > 0)) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+-(UITableViewCellEditingStyle) tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewCellEditingStyleInsert;
+}
+
 #pragma mark UITextField Delegate methods
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -200,30 +258,41 @@
     return NO;
 }
 
+-(void) textFieldDidBeginEditing:(UITextField *)textField {
+    self.inputTable.contentInset = UIEdgeInsetsMake(0, 0, 220, 0);
+    if ([textField.placeholder isEqual: @"Default Input Parameter"]) {
+        [self.inputTable setEditing:YES animated:YES];
+    }
+    
+    //[self.inputTable scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:cell_index inSection:cell_section] animated:YES];
 
+}
      
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
     //NSIndexPath *indexPath = [self.inputTable indexPathForSelectedRow];
-    
-    switch (textField.tag) {
-        case 0:
-            [self.attributesDict setObject:textField.text forKey:@"Name"];
+    if ( textField.text != nil ) {
+        switch (textField.tag) {
+            case 0:
+                [self.attributesDict setObject:textField.text forKey:@"Name"];
+                break;
+            case 1:
+                [self.attributesDict setObject:textField.text forKey:@"URL"];
             break;
-        case 1:
-            [self.attributesDict setObject:[NSURL URLWithString:textField.text] forKey:@"URL"];
-            break;
-        case 2:
-        {
-            NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
-            [f setNumberStyle:NSNumberFormatterDecimalStyle];
-            NSNumber * portNumber = [f numberFromString:@"42"];
-            [self.attributesDict setObject:portNumber forKey:@"Port"];
+            case 2:
+                [self.attributesDict setObject:textField.text forKey:@"Port"];
+                break;
+            case 3:
+                [self.attributesDict setObject:textField.text forKey:@"Method"];
+                break;
+            case 4: {
+                NSMutableArray *params = [self.attributesDict objectForKey:@"Parameters"];
+                [params addObject:textField.text];
+                [self.attributesDict setObject:params forKey:@"Parameters"];
+            }
+            default:
+                break;
         }
-            break;
-
-        default:
-            break;
     }
 }
 

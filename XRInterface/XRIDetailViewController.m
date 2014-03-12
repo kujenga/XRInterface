@@ -12,8 +12,13 @@
 #import "XMLRPCResponse.h"
 #import "XMLRPCConnectionManager.h"
 
-@interface XRIDetailViewController ()
+@interface XRIDetailViewController () {
+    NSDictionary * _attributes;
+}
 @property (strong, nonatomic) UIPopoverController *masterPopoverController;
+@property (weak, nonatomic) IBOutlet UINavigationItem *headerLabel;
+
+
 - (void)configureView;
 @end
 
@@ -25,7 +30,9 @@
 {
     if (_detailItem != newDetailItem) {
         _detailItem = newDetailItem;
-        
+        if ([_detailItem class] == [NSDictionary class]) {
+            _attributes = (NSDictionary*)_detailItem;
+        }
         // Update the view.
         [self configureView];
     }
@@ -42,6 +49,11 @@
     if (self.detailItem) {
         self.detailDescriptionLabel.text = [self.detailItem description];
     }
+    
+    if (_attributes) {
+        self.headerLabel.title = [_attributes objectForKey:@"Name"];
+    }
+    
 }
 
 - (void)viewDidLoad
