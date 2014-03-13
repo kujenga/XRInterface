@@ -8,6 +8,7 @@
 
 #import "XRIMasterViewController.h"
 #import "XRIDetailViewController.h"
+#import "XRIBookstoreViewController.h"
 #import "XRINewConnectionViewController.h"
 
 #define DEFAULT_PORT 8800
@@ -80,8 +81,9 @@
         [[segue destinationViewController] setDetailItem:chosenAttributes];
         
     } else if ([[segue identifier] isEqualToString:@"showCreator"]) {
-        
         [[segue destinationViewController] connectMaster:self];
+    } else if ([[segue identifier] isEqualToString:@"showBookstore"]) {
+        [(XRIBookstoreViewController*)[segue destinationViewController] passAttributes:[_connections objectAtIndex:0]];
     }
 }
 
