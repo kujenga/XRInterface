@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8608DE8B18D28D920065B677 /* LICENSE.md in Resources */ = {isa = PBXBuildFile; fileRef = 8608DE8918D28D920065B677 /* LICENSE.md */; };
+		8608DE8C18D28D920065B677 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 8608DE8A18D28D920065B677 /* README.md */; };
 		8626EB2318CF970D00AC160C /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 8626EB2218CF970D00AC160C /* README.md */; };
 		8626EB2618CF97FF00AC160C /* XRIBookstoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8626EB2518CF97FF00AC160C /* XRIBookstoreViewController.m */; };
 		8631649718C92626006CC9C3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8631649618C92626006CC9C3 /* Foundation.framework */; };
@@ -48,6 +50,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8608DE8918D28D920065B677 /* LICENSE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.md; sourceTree = "<group>"; };
+		8608DE8A18D28D920065B677 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		8626EB2218CF970D00AC160C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = SOURCE_ROOT; };
 		8626EB2418CF97FF00AC160C /* XRIBookstoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRIBookstoreViewController.h; sourceTree = "<group>"; };
 		8626EB2518CF97FF00AC160C /* XRIBookstoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XRIBookstoreViewController.m; sourceTree = "<group>"; };
@@ -206,6 +210,8 @@
 		863BED5818CA8B1800664312 /* XML-RPC handling */ = {
 			isa = PBXGroup;
 			children = (
+				8608DE8918D28D920065B677 /* LICENSE.md */,
+				8608DE8A18D28D920065B677 /* README.md */,
 				863BED6418CA8BC000664312 /* NSData+Base64.h */,
 				863BED6518CA8BC000664312 /* NSData+Base64.m */,
 				863BED6618CA8BC000664312 /* NSStringAdditions.h */,
@@ -311,7 +317,9 @@
 				863164AD18C92627006CC9C3 /* Main_iPad.storyboard in Resources */,
 				863164B518C92627006CC9C3 /* Images.xcassets in Resources */,
 				8626EB2318CF970D00AC160C /* README.md in Resources */,
+				8608DE8C18D28D920065B677 /* README.md in Resources */,
 				863164AA18C92627006CC9C3 /* Main_iPhone.storyboard in Resources */,
+				8608DE8B18D28D920065B677 /* LICENSE.md in Resources */,
 				863164A118C92626006CC9C3 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
