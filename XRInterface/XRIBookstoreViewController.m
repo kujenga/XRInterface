@@ -7,7 +7,7 @@
 //  storyboard for further customization of the app.
 //
 //  Created by Aaron Taylor on 3/11/14.
-//  Copyright (c) 2014 Williams College cs339. All rights reserved.
+//  Copyright (c) 2014 Aaron Taylor. All rights reserved.
 //
 
 #import "XRIBookstoreViewController.h"
@@ -19,14 +19,16 @@
 @interface XRIBookstoreViewController ()
 
 -(IBAction)submitRequest:(id)sender;
-
+// UI elements facilitaiting input and interaction
 @property (weak, nonatomic) IBOutlet UIPickerView *methodPicker;
 @property (weak, nonatomic) IBOutlet UITableView *parameterCells;
 @property (weak, nonatomic) IBOutlet UITextView *displayText;
 
-
+// The attributes for the connection passed in from the master
 @property (strong,atomic) NSDictionary * attributes;
+// Dictionary containing nice names associated with methods keyed to their specific call syntax
 @property (strong,atomic) NSDictionary * methodDic;
+// An array of the parameters that are sent along the connection for the XML-RPC method call, updated as they are input by user
 @property (strong,atomic) NSMutableArray *parametersArray;
 
 @end
@@ -60,6 +62,11 @@
     [self.attributes setValue:[self.methodDic valueForKey:[self.methodDic allKeys][0]] forKey:@"Method"];
     
     [self.displayText setText:@"Server response displayed here"];
+    
+    // Sets default method to Buy if user leaves the UIPickerView untouched
+    NSArray *keys = [self.methodDic allKeys];
+    NSString *fullMethod = [self.methodDic objectForKey:keys[0]];
+    [self.attributes setValue:fullMethod forKey:@"Method"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -75,17 +82,14 @@
 
 -(IBAction)submitRequest:(id)sender
 {
+    // Uses the XML-RPC library to create a connection to the server and submit the proper request
     NSString *URLString = [NSString stringWithFormat:@"%@:%@",[_attributes objectForKey:@"URL"],[_attributes objectForKey:@"Port"]];
     NSLog(@"URLString: %@",URLString);
     NSURL *URL = [NSURL URLWithString: URLString];
     XMLRPCRequest *request = [[XMLRPCRequest alloc] initWithURL: URL];
     XMLRPCConnectionManager *manager = [XMLRPCConnectionManager sharedManager];
-    
-    //NSArray *params = @[@53477]; // Achieving Less Bugs with More Hugs in CSCI 339 (item: 53477)
-    
     [request setMethod:(NSString*)[self.attributes objectForKey:@"Method"] withParameters:[self.attributes objectForKey:@"Parameters"]];
     NSLog(@"Request body: %@", [request body]);
-    
     [manager spawnConnectionWithXMLRPCRequest: request delegate: self];
 
 }
@@ -120,12 +124,12 @@
 
 - (void)request: (XMLRPCRequest *)request didReceiveAuthenticationChallenge: (NSURLAuthenticationChallenge *)challenge
 {
-    
+    NSLog(@"XMLRPC request did recieve authentication challenge: %@",challenge);
 }
 
 - (void)request: (XMLRPCRequest *)request didCancelAuthenticationChallenge: (NSURLAuthenticationChallenge *)challenge
 {
-    
+    NSLog(@"XMLRPC request did cancel authentication challenge: %@",challenge);
 }
 
 #pragma mark - Picker view data source
@@ -142,6 +146,7 @@
 
 #pragma mark Picker view delegate
 
+// returns method nice names to be placed into each row
 -(NSString*) pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
     NSArray *keys = [self.methodDic allKeys];
@@ -183,6 +188,7 @@
     return 1;
 }
 
+// returns the single cell for the parameter input, just need one for this setup
 -(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString * cellIdentifier = [NSString stringWithFormat:@"Cell"];
@@ -234,7 +240,7 @@
 }
 
 
-
+// responds to user finishing parameter input and calls submitRequest method
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
     NSNumberFormatter * f = [[NSNumberFormatter alloc] init];

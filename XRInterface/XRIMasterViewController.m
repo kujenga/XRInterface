@@ -3,7 +3,7 @@
 //  XRInterface
 //
 //  Created by Aaron Taylor on 3/6/14.
-//  Copyright (c) 2014 Williams College cs339. All rights reserved.
+//  Copyright (c) 2014 Aaron Taylor. All rights reserved.
 //
 
 #import "XRIMasterViewController.h"
@@ -15,6 +15,8 @@
 
 @interface XRIMasterViewController () {
     NSMutableArray *_objects;
+    // the array that holds dictionary objects for each connection
+    // order of the array corresponds to order of the items in the UI
     NSMutableArray *_connections;
 }
 @end
@@ -41,12 +43,13 @@
         _connections = [[NSMutableArray alloc] init];
     }
     
+    // sets up the connection to the 
     NSMutableDictionary * bookstoreConnection = [[NSMutableDictionary alloc] initWithCapacity:10];
     [bookstoreConnection setObject:@"Bookstore Connection" forKey:@"Name"];
     [bookstoreConnection setObject:[NSURL URLWithString:@"http://rath.cs.williams.edu"] forKey:@"URL"];
     [bookstoreConnection setObject:[NSNumber numberWithInt:DEFAULT_PORT] forKey:@"Port"];
     [_connections addObject:bookstoreConnection];
-    
+    // Sets up the default dictionary ojects that are associated with the Default Connection row
     NSMutableDictionary * defaultConnection = [[NSMutableDictionary alloc] initWithCapacity:10];
     [defaultConnection setObject:@"Default Connection" forKey:@"Name"];
     [defaultConnection setObject:[NSURL URLWithString:@"http://rath.cs.williams.edu"] forKey:@"URL"];
@@ -60,7 +63,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-
+// This method is called by the NewConnectionViewController upon sucessful entry of the necessary parameters
 -(void)insertNewObject:(id)sender withConnectionAttributes:(NSDictionary *)connectionAttributes
 {
     if (!_connections) {
@@ -74,12 +77,10 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
-        
+        // Passes appropriate
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        //NSDate *object = _objects[indexPath.row];
         NSDictionary *chosenAttributes = _connections[indexPath.row];
         [[segue destinationViewController] setDetailItem:chosenAttributes];
-        
     } else if ([[segue identifier] isEqualToString:@"showCreator"]) {
         [[segue destinationViewController] connectMaster:self];
     } else if ([[segue identifier] isEqualToString:@"showBookstore"]) {
@@ -87,7 +88,7 @@
     }
 }
 
-#pragma mark - Table View
+#pragma mark - Table View data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -96,20 +97,18 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // +1 accounts for bookstore
     return _connections.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    // This case allows for linking of a custom view controller via storyboard segue
+    // more such cases can be added for further customized view controllers
     if ((indexPath.section == 0) && (indexPath.row == 0)) {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"bookstoreCell" forIndexPath:indexPath];
-        
         return cell;
     } else {
-    
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-        
         cell.textLabel.text = [_connections[indexPath.row] objectForKey:@"Name"];
         return cell;
     }
@@ -117,7 +116,7 @@
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Return NO if you do not want the specified item to be editable.
+    // Prevents the Bookstore menu item from being deleted by the user
     if (indexPath.row > 0)
         return YES;
     else
@@ -134,24 +133,10 @@
     }
 }
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    // currently only handles the transitions for the ipad interface
+    // see prepareForSegue method for the iPhone interface
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         NSDate *object = _objects[indexPath.row];
         self.detailViewController.detailItem = object;
